@@ -1,5 +1,5 @@
 using PyCall
-using ITensors
+using ITensors, ITensorMPS
 
 pyscf = pyimport("pyscf")
 fci = pyimport("pyscf.fci")
@@ -74,7 +74,7 @@ e_mf_mps = inner(ψmf', H, ψmf)
 println("Energy Error from MF MPS (Ha) ", abs(e_mf_mps - mf.e_tot))
 
 # Initialize our MPS
-ψ0 = randomMPS(s, occupation_to_state.(n_occ); linkdims=40)
+ψ0 = random_mps(s, occupation_to_state.(n_occ); linkdims=40)
 @show inner(ψ0', H, ψ0)
 
 # Run DMRG
